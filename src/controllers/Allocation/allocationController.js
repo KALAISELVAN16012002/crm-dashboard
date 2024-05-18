@@ -260,18 +260,18 @@ export const getFollowupAndFutureFollowupData = async (req, res, next) => {
       ? { $or: [{ Disposition: /^Not Int/ }, { Disposition: /^Call Back/ },{ Disposition: /^DNE/ }] }
       : Role === 'TeamLeader'
       ? { $and: [{ $or: [{ Disposition: /^Not Int/ }, { Disposition: /^Call Back/ },{ Disposition: /^DNE/ }] }, { selectedTeamLeader: UserName }] }
-      : Role === 'Telecaller'
-      ? { $and: [{ $or: [{ Disposition: /^Not Int/ }, { Disposition: /^Call Back/ },{ Disposition: /^DNE/ }] }, { selectedTelecaller: UserName }] }
+        : Role === 'Telecaller'
+          ? { $and: [{ $or: [{ Disposition: /^Not Int/ }, { Disposition: /^Call Back/ },{ Disposition: /^DNE/ }] }, { selectedTelecaller: UserName }] }
       : { resdata: [], totallength: 0 };
     if (typeof filter === 'object' && filter.resdata) {
       return res.status(200).json(filter);
     }
     const totallength = await Allocation.countDocuments(filter);
-    const resdata = await Allocation.find(filter).skip(parseInt(first)) .limit(parseInt(rows)) .lean();
-    res.status(200).send({ resdata, totallength });
+    const resdata = await Allocation.find(filter).skip(parseInt(first)).limit(parseInt(rows)).lean();
+    res.status(200).send({ resdata, totallength })
   } catch (err) {
     console.error(err);
-    res.status(500).send({ error: 'Internal Server Error' });
+    res.status(500).send({ error: 'Internal Server Error' })
   }
 };
 

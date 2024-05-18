@@ -1,5 +1,5 @@
 import mongoose from 'mongoose'
-export const conn = mongoose.createConnection('mongodb://0.0.0.0:27017/cashflowcrm', (err, db) => {
+export const conn = mongoose.createConnection('mongodb+srv://kalaiselvantcz:kalaiselvancrm@cluster0.snoes0m.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0', (err, db) => {
   if (err) {
     console.log(err)
   }
